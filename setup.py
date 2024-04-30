@@ -39,6 +39,7 @@ setup(
         "cohere==4.33",
         "requests",
         "pypdf2",
+        "security==1.2.1",
     ],
     extras_require={
         "dev": ["pytest", "wheel", "twine", "black>=23.7.0", "setuptools"],
