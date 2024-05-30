@@ -2,6 +2,7 @@ import re
 
 from wasabi import msg  # type: ignore[import]
 from weaviate import Client
+from typing import Optional
 
 
 VECTORIZERS = set(
@@ -15,7 +16,7 @@ def strip_non_letters(s: str):
 
 
 def verify_vectorizer(
-    schema: dict, vectorizer: str, skip_properties: list[str] = []
+    schema: dict, vectorizer: str, skip_properties: Optional[list[str]] = None
 ) -> dict:
     """Verifies if the vectorizer is available and adds it to a schema, also skips vectorization if list is provided
     @parameter schema : dict - Schema json
@@ -23,6 +24,7 @@ def verify_vectorizer(
     @parameter skip_properties: list[str] - List of property names that should not get vectorized
     @returns dict - Modified schema if vectorizer is available
     """
+    skip_properties = [] if skip_properties is None else skip_properties
     modified_schema = schema.copy()
     # Verify Vectorizer
     if vectorizer in VECTORIZERS:

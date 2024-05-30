@@ -1,4 +1,5 @@
 from goldenverba.components.chunking.chunk import Chunk
+from typing import Optional
 
 
 class Document:
@@ -11,8 +12,9 @@ class Document:
         link: str = "",
         timestamp: str = "",
         reader: str = "",
-        meta: dict = {},
+        meta: Optional[dict] = None,
     ):
+        meta = {} if meta is None else meta
         self._text = text
         self._type = type
         self._name = name

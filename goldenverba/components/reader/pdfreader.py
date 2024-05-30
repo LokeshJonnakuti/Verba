@@ -8,6 +8,7 @@ from datetime import datetime
 
 from goldenverba.components.reader.interface import Reader, InputForm
 from goldenverba.components.reader.document import Document
+from typing import Optional
 
 try:
     from PyPDF2 import PdfReader
@@ -30,10 +31,10 @@ class PDFReader(Reader):
 
     def load(
         self,
-        bytes: list[str] = [],
-        contents: list[str] = [],
-        paths: list[str] = [],
-        fileNames: list[str] = [],
+        bytes: Optional[list[str]] = None,
+        contents: Optional[list[str]] = None,
+        paths: Optional[list[str]] = None,
+        fileNames: Optional[list[str]] = None,
         document_type: str = "Documentation",
     ) -> list[Document]:
         """Ingest data into Weaviate
@@ -44,6 +45,10 @@ class PDFReader(Reader):
         @parameter: document_type : str - Document type
         @returns list[Document] - Lists of documents
         """
+        bytes = [] if bytes is None else bytes
+        contents = [] if contents is None else contents
+        paths = [] if paths is None else paths
+        fileNames = [] if fileNames is None else fileNames
 
         documents = []
 
