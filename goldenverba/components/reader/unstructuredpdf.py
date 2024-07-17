@@ -104,7 +104,7 @@ class UnstructuredPDF(Reader):
 
         file_data = {"files": open("reconstructed.pdf", "rb")}
 
-        response = requests.post(url, headers=headers, data=data, files=file_data)
+        response = requests.post(url, headers=headers, data=data, files=file_data, timeout=60)
 
         json_response = response.json()
 
@@ -153,7 +153,7 @@ class UnstructuredPDF(Reader):
 
         file_data = {"files": open(file_path, "rb")}
 
-        response = requests.post(url, headers=headers, data=data, files=file_data)
+        response = requests.post(url, headers=headers, data=data, files=file_data, timeout=60)
 
         file_data["files"].close()
 
