@@ -1,13 +1,12 @@
 import os
 import base64
 import json
-
-import requests
 from datetime import datetime
 from wasabi import msg
 
 from goldenverba.components.reader.interface import Reader, InputForm
 from goldenverba.components.reader.document import Document
+from security import safe_requests
 
 
 class GithubReader(Reader):
@@ -97,7 +96,7 @@ class GithubReader(Reader):
             "Authorization": f"token {os.environ.get('GITHUB_TOKEN', '')}",
             "Accept": "application/vnd.github.v3+json",
         }
-        response = requests.get(url, headers=headers)
+        response = safe_requests.get(url, headers=headers)
         response.raise_for_status()  # Raise an exception for HTTP errors
 
         files = [
@@ -131,7 +130,7 @@ class GithubReader(Reader):
             "Authorization": f"token {os.environ.get('GITHUB_TOKEN', '')}",
             "Accept": "application/vnd.github.v3+json",
         }
-        response = requests.get(url, headers=headers)
+        response = safe_requests.get(url, headers=headers)
         response.raise_for_status()
 
         content_b64 = response.json()["content"]
